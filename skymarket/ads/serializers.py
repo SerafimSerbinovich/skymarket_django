@@ -21,7 +21,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class AdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
-        fields = ('pk', 'title', 'price', 'description')
+        fields = ('pk', 'title', 'price', 'description', 'image')
 
 
 class AdDetailSerializer(serializers.ModelSerializer):
@@ -33,7 +33,16 @@ class AdDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('pk', 'title', 'price', 'author', 'author_id', 'author_first_name', 'author_last_name', 'phone', 'image')
+        fields = ('pk',
+                  'title',
+                  'price',
+                  'author',
+                  'author_id',
+                  'author_first_name',
+                  'author_last_name',
+                  'phone',
+                  'image',
+                  'description')
 
     def get_author_first_name(self, obj):
         author_data = CurrentUserSerializer(obj.author).data

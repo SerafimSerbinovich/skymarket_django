@@ -1,5 +1,6 @@
 from ads.filters import AdFilter
 from ads.models import Ad, Comment
+from ads.permissions import IsAdminOrOwner
 from ads.serializers import AdSerializer, CommentSerializer, AdDetailSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import pagination, viewsets, generics, permissions
@@ -35,7 +36,7 @@ class AdViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve', 'create', 'me']:
             self.permission_classes = [IsAuthenticated]
         else:
-            self.permission_classes = [IsAdminUser]
+            self.permission_classes = [IsAdminOrOwner]
         return super().get_permissions()
 
     def get_queryset(self):

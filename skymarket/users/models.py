@@ -22,7 +22,7 @@ class CustomUser(AbstractBaseUser):
     phone = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=5, choices=ROLE_CHOICES, default=UserRoles.USER.value)
-    image = models.ImageField(upload_to=MEDIA_ROOT, blank=True, null=True)
+    image = models.ImageField(upload_to='django_media', blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
