@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     "djoser",
+    "django_filters",
 
 ]
 
@@ -108,6 +110,11 @@ DJOSER = {
     'LOGIN_FIELD': 'email'
 }
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=360),
+}
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Database
@@ -118,8 +125,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
-        'USER': 'skymarket',
-        'PASSWORD': 'skymarket',
+        'USER': os.environ.get('DB_USER', 'skymarket'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'skymarket'),
         'HOST': os.environ.get('DB_HOST'),
         'PORT': os.environ.get('DB_PORT'),
     }

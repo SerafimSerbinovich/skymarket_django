@@ -10,5 +10,5 @@ users_router.register("api/users", UserViewSet, basename="users")
 urlpatterns = [
     path("", include(users_router.urls)),
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
